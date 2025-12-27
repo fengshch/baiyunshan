@@ -1,722 +1,962 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A professional, beautiful homepage built with pure HTML and CSS." />
+  <title>NovaWorks — Modern Solutions</title>
+  <style>
+    /*
+      Pure HTML + CSS
+      - No external assets required
+      - Accessible, responsive layout
+      - Subtle gradients, soft shadows
+    */
+
+    :root {
+      --bg: #0b1220;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-2: rgba(255, 255, 255, 0.10);
+      --text: rgba(255, 255, 255, 0.92);
+      --muted: rgba(255, 255, 255, 0.70);
+      --muted-2: rgba(255, 255, 255, 0.55);
+      --brand: #6ee7ff;
+      --brand-2: #a78bfa;
+      --accent: #34d399;
+      --danger: #fb7185;
+      --ring: rgba(110, 231, 255, 0.35);
+
+      --shadow: 0 20px 60px rgba(0,0,0,0.55);
+      --shadow-soft: 0 12px 30px rgba(0,0,0,0.35);
+
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+
+      --max: 1120px;
+      --pad: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      background: radial-gradient(1200px 650px at 20% 10%, rgba(167, 139, 250, 0.20), transparent 60%),
+                  radial-gradient(1000px 650px at 75% 15%, rgba(110, 231, 255, 0.18), transparent 55%),
+                  radial-gradient(900px 600px at 50% 90%, rgba(52, 211, 153, 0.12), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px var(--ring);
+      border-radius: 10px;
+    }
+
+    .container {
+      width: min(var(--max), 100% - 2 * var(--pad));
+      margin: 0 auto;
+    }
+
+    /* Top nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(11, 18, 32, 0.82), rgba(11, 18, 32, 0.45));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 750;
+      letter-spacing: 0.2px;
+    }
+
+    .logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      background:
+        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,0.80), transparent 60%),
+        conic-gradient(from 210deg, var(--brand), var(--brand-2), var(--accent), var(--brand));
+      box-shadow: 0 10px 24px rgba(0,0,0,0.40);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted-2);
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--muted);
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: transform 150ms ease, background 150ms ease, border-color 150ms ease, color 150ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.10);
+      transform: translateY(-1px);
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(110,231,255,0.18), rgba(167,139,250,0.18));
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: var(--shadow-soft);
+      color: var(--text);
+    }
+
+    .cta strong { font-size: 14px; }
+    .pill {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(52, 211, 153, 0.14);
+      border: 1px solid rgba(52, 211, 153, 0.22);
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 56px 0 26px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background:
+        radial-gradient(500px 300px at 12% 18%, rgba(110,231,255,0.22), transparent 60%),
+        radial-gradient(500px 320px at 70% 30%, rgba(167,139,250,0.18), transparent 62%),
+        radial-gradient(600px 330px at 50% 80%, rgba(52,211,153,0.12), transparent 62%);
+      pointer-events: none;
+      filter: blur(12px);
+      opacity: 0.9;
+    }
+
+    .hero-content { position: relative; }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.78);
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.15);
+    }
+
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(34px, 4.2vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -0.8px;
+    }
+
+    .lead {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 62ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: transform 140ms ease, background 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+      user-select: none;
+    }
+
+    .btn-primary {
+      color: rgba(9, 12, 18, 0.92);
+      background: linear-gradient(135deg, rgba(110,231,255,0.95), rgba(167,139,250,0.95));
+      box-shadow: 0 18px 40px rgba(110,231,255,0.15), 0 18px 40px rgba(167,139,250,0.10);
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); }
+
+    .btn-secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .trust {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      color: var(--muted-2);
+      font-size: 13px;
+    }
+
+    .trust .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* Right side panel */
+    .side {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .panel {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .panel h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      letter-spacing: 0.2px;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .metric {
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+    }
+
+    .metric span {
+      color: var(--muted-2);
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .mini-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-item {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(110,231,255,0.25), rgba(167,139,250,0.25));
+      border: 1px solid rgba(255,255,255,0.12);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+      font-size: 16px;
+    }
+
+    .mini-item b {
+      font-size: 13px;
+      letter-spacing: 0.2px;
+    }
+
+    .mini-item em {
+      display: block;
+      font-style: normal;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+
+    /* Sections */
+    section {
+      padding: 22px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 0 0 14px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: -0.2px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 62ch;
+      line-height: 1.5;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      position: relative;
+      min-height: 180px;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(500px 220px at 20% 0%, rgba(110,231,255,0.10), transparent 60%);
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    .card > * { position: relative; }
+
+    .card h3 {
+      margin: 10px 0 8px;
+      font-size: 16px;
+      letter-spacing: -0.2px;
+    }
+
+    .card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .card a.more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.88);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      transition: transform 140ms ease, background 140ms ease;
+    }
+
+    .card a.more:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.07);
+    }
+
+    /* Testimonial */
+    .quote {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+    }
+
+    blockquote {
+      margin: 0;
+      padding: 22px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    blockquote::before {
+      content: "“";
+      position: absolute;
+      top: -28px;
+      left: 16px;
+      font-size: 110px;
+      color: rgba(255,255,255,0.10);
+      font-weight: 900;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    blockquote p {
+      margin: 0 0 14px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.86);
+    }
+
+    blockquote footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(52,211,153,0.35), rgba(110,231,255,0.25));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.30);
+    }
+
+    .newsletter {
+      padding: 22px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(110,231,255,0.10), rgba(167,139,250,0.10));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .newsletter h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .newsletter p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .input {
+      flex: 1 1 220px;
+      min-width: 220px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .input::placeholder { color: rgba(255,255,255,0.45); }
+
+    /* Footer */
+    footer {
+      padding: 34px 0 50px;
+      color: var(--muted);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 14px;
+      padding: 20px;
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-grid h4 {
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.88);
+      letter-spacing: 0.2px;
+    }
+
+    .footer-grid a {
+      display: inline-block;
+      padding: 7px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-grid a:hover { color: rgba(255,255,255,0.90); }
+
+    .subfooter {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 14px;
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .quote { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .nav-inner { padding: 12px 0; }
+      .nav-links { gap: 6px; }
+      .nav-links a { padding: 9px 10px; }
+      .cta { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; }
+      .btn, .nav-links a, .card a.more { transition: none; }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <header class="nav" role="banner">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="NovaWorks home">
+        <span class="logo" aria-hidden="true"></span>
+        <span>
+          NovaWorks
+          <small>Modern Solutions</small>
+        </span>
+      </a>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#customers">Customers</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="#contact">
+          <span class="pill">New</span>
+          <strong>Book a demo</strong>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="hero-content">
+            <div class="kicker"><span class="dot" aria-hidden="true"></span> Ship faster with a polished, scalable web presence</div>
+            <h1>Build trust. Convert more. Grow with confidence.</h1>
+            <p class="lead">
+              A clean, professional homepage that looks premium out of the box — fully responsive, accessible, and built with pure HTML + CSS.
+              Swap in your branding and content in minutes.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#contact">
+                <span aria-hidden="true">⚡</span>
+                Get started
+              </a>
+              <a class="btn btn-secondary" href="#features">
+                <span aria-hidden="true">▶</span>
+                Explore features
+              </a>
+            </div>
+
+            <div class="trust" aria-label="Trust indicators">
+              <span class="badge"><span aria-hidden="true">🔒</span> Privacy-first</span>
+              <span class="badge"><span aria-hidden="true">✅</span> Accessible & responsive</span>
+              <span class="badge"><span aria-hidden="true">🛠️</span> Easy to customize</span>
+            </div>
+          </div>
         </div>
+
+        <aside class="side" aria-label="Highlights">
+          <div class="panel">
+            <h3>What you get</h3>
+            <p>
+              Modern layout, premium styling, and practical sections: hero, feature grid, social proof, newsletter, and a complete footer.
+            </p>
+
+            <div class="metric-grid" aria-label="Key metrics">
+              <div class="metric">
+                <strong>95+</strong>
+                <span>Lighthouse-ready patterns</span>
+              </div>
+              <div class="metric">
+                <strong>1 file</strong>
+                <span>Zero dependencies</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Quick wins</h3>
+            <ul class="mini-list">
+              <li class="mini-item">
+                <span class="icon" aria-hidden="true">🎯</span>
+                <span>
+                  <b>Clear CTA</b>
+                  <em>Designed to guide users to the next step.</em>
+                </span>
+              </li>
+              <li class="mini-item">
+                <span class="icon" aria-hidden="true">📈</span>
+                <span>
+                  <b>Conversion-friendly</b>
+                  <em>Trust badges + proof points + newsletter.</em>
+                </span>
+              </li>
+              <li class="mini-item">
+                <span class="icon" aria-hidden="true">🧩</span>
+                <span>
+                  <b>Flexible sections</b>
+                  <em>Drop in your own content easily.</em>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+    <!-- FEATURES -->
+    <section id="features">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Features that feel premium</h2>
+            <p>Thoughtful components for a homepage that looks modern, loads fast, and reads well on every device.</p>
+          </div>
         </div>
+
+        <div class="cards" role="list">
+          <article class="card" role="listitem">
+            <div class="icon" aria-hidden="true">✨</div>
+            <h3>Polished visual system</h3>
+            <p>Subtle gradients, consistent spacing, and soft shadows — designed to look professional without being flashy.</p>
+            <a class="more" href="#solutions">Learn more <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="card" role="listitem">
+            <div class="icon" aria-hidden="true">⚙️</div>
+            <h3>Easy customization</h3>
+            <p>Edit colors, text, and sections in one file. No build tools, no frameworks, and no assets required.</p>
+            <a class="more" href="#pricing">View pricing <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="card" role="listitem">
+            <div class="icon" aria-hidden="true">🧠</div>
+            <h3>Accessible by default</h3>
+            <p>Semantic HTML, focus states, good contrast, and layout that respects reduced motion preferences.</p>
+            <a class="more" href="#contact">Contact us <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+    <!-- SOLUTIONS -->
+    <section id="solutions">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Solutions for modern teams</h2>
+            <p>Use this layout for agencies, SaaS, IT services, consultancies, or any business that needs a credible presence.</p>
+          </div>
         </div>
+
+        <div class="cards" role="list">
+          <article class="card" role="listitem">
+            <div class="icon" aria-hidden="true">🏢</div>
+            <h3>Business websites</h3>
+            <p>Present services, collect leads, and showcase proof — all with a clean layout that builds confidence.</p>
+            <a class="more" href="#customers">See customers <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="card" role="listitem">
+            <div class="icon" aria-hidden="true">🧰</div>
+            <h3>Product landing pages</h3>
+            <p>Highlight features, benefits, and calls-to-action with a hero section that does the heavy lifting.</p>
+            <a class="more" href="#pricing">Compare plans <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="card" role="listitem">
+            <div class="icon" aria-hidden="true">🧑‍💼</div>
+            <h3>Consulting / portfolio</h3>
+            <p>Introduce your work and expertise with a professional tone and strong typography hierarchy.</p>
+            <a class="more" href="#contact">Request a quote <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
+    <!-- CUSTOMERS + NEWSLETTER -->
+    <section id="customers">
+      <div class="container quote">
+        <blockquote aria-label="Customer testimonial">
+          <p>
+            This homepage template instantly made our site feel credible. It’s clean, fast, and easy to customize —
+            exactly what we needed.
+          </p>
+          <footer>
+            <span style="display:inline-flex;align-items:center;gap:10px;">
+              <span class="avatar" aria-hidden="true"></span>
+              <span>
+                <strong style="color:rgba(255,255,255,0.86);">Jordan Lee</strong><br />
+                <span>Operations Lead</span>
+              </span>
+            </span>
+            <span aria-label="Rating">★★★★★</span>
+          </footer>
+        </blockquote>
+
+        <div class="newsletter" id="pricing" aria-label="Newsletter signup">
+          <h3>Simple pricing</h3>
+          <p>
+            Start with the free version and upgrade when you need more pages.
+            No lock-in. Transparent plans.
+          </p>
+
+          <div class="metric-grid" aria-label="Pricing tiers">
+            <div class="metric">
+              <strong>$0</strong>
+              <span>Starter / Personal</span>
+            </div>
+            <div class="metric">
+              <strong>$29</strong>
+              <span>Pro / Teams</span>
+            </div>
+          </div>
+
+          <p style="margin-top:14px;">
+            Get product updates and templates (optional):
+          </p>
+
+          <form class="form" action="#" method="post" onsubmit="return false;">
+            <label class="sr-only" for="email" style="position:absolute;left:-9999px;">Email address</label>
+            <input id="email" class="input" type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
+            <button class="btn btn-primary" type="submit">
+              <span aria-hidden="true">📩</span>
+              Subscribe
+            </button>
+          </form>
+
+          <p style="margin-top:12px;color:rgba(255,255,255,0.60);font-size:12px;">
+            By subscribing you agree to receive emails. Unsubscribe anytime.
+          </p>
         </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Contact</h2>
+            <p>Replace this with your real contact details or embed your preferred form provider.</p>
+          </div>
         </div>
-    </footer>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+        <div class="cards" role="list">
+          <article class="card" role="listitem" style="min-height:unset;">
+            <div class="icon" aria-hidden="true">📍</div>
+            <h3>Office</h3>
+            <p>123 Market Street, Suite 500<br />San Francisco, CA</p>
+            <a class="more" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+          </article>
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
+          <article class="card" role="listitem" style="min-height:unset;">
+            <div class="icon" aria-hidden="true">✉️</div>
+            <h3>Email</h3>
+            <p>hello@novaworks.example<br />support@novaworks.example</p>
+            <a class="more" href="#">Open email <span aria-hidden="true">→</span></a>
+          </article>
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+          <article class="card" role="listitem" style="min-height:unset;">
+            <div class="icon" aria-hidden="true">🕒</div>
+            <h3>Hours</h3>
+            <p>Mon–Fri: 9:00–18:00<br />Sat: 10:00–16:00</p>
+            <a class="more" href="#">Schedule a call <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid" aria-label="Footer">
+        <div>
+          <a class="brand" href="#top" aria-label="NovaWorks home">
+            <span class="logo" aria-hidden="true"></span>
+            <span>
+              NovaWorks
+              <small>Modern Solutions</small>
+            </span>
+          </a>
+          <p style="margin:12px 0 0;color:rgba(255,255,255,0.62);font-size:13px;line-height:1.6;max-width:46ch;">
+            Premium-looking pages without frameworks. Fast, clean, and easy to adapt to your brand.
+          </p>
+        </div>
+
+        <div>
+          <h4>Product</h4>
+          <a href="#features">Features</a><br />
+          <a href="#solutions">Solutions</a><br />
+          <a href="#pricing">Pricing</a>
+        </div>
+
+        <div>
+          <h4>Company</h4>
+          <a href="#customers">Customers</a><br />
+          <a href="#contact">Contact</a><br />
+          <a href="#">Careers</a>
+        </div>
+
+        <div>
+          <h4>Resources</h4>
+          <a href="#">Docs</a><br />
+          <a href="#">Changelog</a><br />
+          <a href="#">Privacy</a>
+        </div>
+      </div>
+
+      <div class="subfooter">
+        <span>© <span id="year">2025</span> NovaWorks. All rights reserved.</span>
+        <span>Made with pure HTML + CSS.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Optional tiny enhancement: keep year current without any dependencies
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
-
 </html>
